@@ -14,19 +14,19 @@
 				text-align: center;
 				cursor: pointer;
 			}
-			
+
 			.quartile-one {
 				background-color: rgba(158,182,119,255);
 			}
-			
+
 			.quartile-two {
 				background-color: rgba(242,222,167,255);
 			}
-			
+
 			.quartile-three {
 				background-color: rgba(221,152,118,255);
 			}
-			
+
 			.quartile-four {
 				background-color: rgba(193,76,67,255);
 			}
@@ -36,21 +36,71 @@
 		<div id="controls">
 			<label for="x-depth">X-Depth:</label>
 			<input type="text" id="x-depth" name="x-depth">
-			
+
 			<label for="y-depth">Y-Depth:</label>
 			<input type="text" id="y-depth" name="y-depth">
-			
-			<div class="button">Load</div>
+
+			<!--table should load under multiplication div on press-->
+			<div class="button" onclick="return receiveGridDim();">Load</div>
 		</div>
 		<div id="multiplication">
-			
+
 		</div>
 		<div id="description">
-			<p>This is placeholder content!</p> 
+			<p>This is placeholder content!</p>
 		</div>
 	</body>
-	
+
+	<!-- -->
 	<script type="text/javascript">
-		
+
+    let xDim = 0; let yDim = 0;
+
+    /*
+		description: on return true, xDim and yDim globals have
+		been set to inputs to use for multiplication table dimensions.
+
+		Validation for number input rather than a character etc.. is
+		not checked
+		*/
+	  function receiveGridDim() {
+			let ret = true;
+
+			//simple two if statements ensuring value is entered
+			//no visual queue of necessary value provided
+			if (document.getElementById('x-depth').value == '') {
+				ret = false;
+			} else {
+				xDim = document.getElementById('x-depth').value;
+			}
+			if (document.getElementById('y-depth').value == '') {
+				ret = false;
+			} else {
+				yDim = document.getElementById('y-depth').value;
+			}
+
+      //this might be flawed, can try without simple no value
+			//verification
+			if (ret === true) {
+				createMultTable();
+			}
+
+      return ret;
+		}
+
+    /*
+		description: createMultTable builds table elements, initializes cell
+		values, and adjusts the color of each cell along the way accordingly
+		*/
+		function createMultTable() {
+			var multTable = document.createElement('table');
+			var tableLocation = document.getElementById('multiplication');
+			tableLocation.appendChild(multTable);
+      for (let x = 0; x <= xDim; x++) {
+				 
+			}
+
+		}
+
 	</script>
 </html>
