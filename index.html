@@ -30,6 +30,23 @@
 			.quartile-four {
 				background-color: rgba(193,76,67,255);
 			}
+
+			/*additional table and cell styling below*/
+			table, tr, td {
+				border: 1px solid black;
+				color: white; /*to be overwritten for 2,3,4 quartile*/
+			}
+
+			td {
+				text-align: center;
+				height: 2em;
+				width: 2em;
+			}
+
+			table {
+				background-color: black;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -90,18 +107,48 @@
 
     /*
 		description: createMultTable builds table elements, initializes cell
-		values, and adjusts the color of each cell along the way accordingly
+		values, and adjusts the color of each cell along the way accordingly.
+
+		x and y for loop increment vars are used for creating the cells
+		themselves and determining the quartile
 		*/
 		function createMultTable() {
+      var maxTableValue = xDim * yDim;
+			var firstQuartileCutoff = maxTableValue / 4;
+			var middleQuartile = maxTableValue / 2; //firstQuartileCutoff * 2
+			var thirdQuartileCutoff = firstQuartileCutoff * 3;
+
 			let multTable = document.createElement('table');
 			let tableLocation = document.getElementById('multiplication');
 			tableLocation.appendChild(multTable);
-      for (let x = 0; x <= xDim; x++) {
+      for (let x = 0; x < xDim; x++) {
 				var tableRow = document.createElement('tr');
 				multTable.appendChild(tableRow);
-				for (let y = 0; y <= yDim; y++) {
+				for (let y = 0; y < yDim; y++) {
 					var tableCell = document.createElement('td');
-					tableRow.appendChild(tableCell)
+					tableRow.appendChild(tableCell);
+					//assign cell values and quartile color along the way
+					if (x === 0) { //handles column titles uncolored
+						tableCell.innerHTML = y;
+						continue;
+					}
+					if (y === 0) { //handles row titles uncolored
+						tableCell.innerHTML = x;
+						continue;
+					}
+					//shouldnt reach this point if one of uncolored cells
+					var cellVal = x * y;
+					tableCell.innerHTML = cellVal;
+					//determine appropriate quartile class
+					if (cellVal < firstQuartileCutoff) {
+						tableCell.classList.add('quartile-one');
+					} else if ((cellVal >= firstQuartileCutoff) && (cellVal < middleQuartile)) {
+						tableCell.classList.add('quartile-two');
+					} else if ((cellVal >= middleQuartile) && (cellVal < thirdQuartileCutoff)) {
+						tableCell.classList.add('quartile-three');
+					} else {
+						tableCell.classList.add('quartile-four');
+					}
 				}
 			}
 
