@@ -34,7 +34,7 @@
 			/*additional table and cell styling below*/
 			table, tr, td {
 				border: 1px solid black;
-				color: white; /*to be overwritten for 2,3,4 quartile*/
+				color: white; /*to be overwritten for all but red quartile*/
 			}
 
 			td {
@@ -121,10 +121,10 @@
 			let multTable = document.createElement('table');
 			let tableLocation = document.getElementById('multiplication');
 			tableLocation.appendChild(multTable);
-      for (let x = 0; x < xDim; x++) {
+      for (let x = 0; x <= xDim; x++) {
 				var tableRow = document.createElement('tr');
 				multTable.appendChild(tableRow);
-				for (let y = 0; y < yDim; y++) {
+				for (let y = 0; y <= yDim; y++) {
 					var tableCell = document.createElement('td');
 					tableRow.appendChild(tableCell);
 					//assign cell values and quartile color along the way
@@ -142,10 +142,13 @@
 					//determine appropriate quartile class
 					if (cellVal < firstQuartileCutoff) {
 						tableCell.classList.add('quartile-one');
+						tableCell.style.color = 'black';
 					} else if ((cellVal >= firstQuartileCutoff) && (cellVal < middleQuartile)) {
 						tableCell.classList.add('quartile-two');
+						tableCell.style.color = 'black';
 					} else if ((cellVal >= middleQuartile) && (cellVal < thirdQuartileCutoff)) {
 						tableCell.classList.add('quartile-three');
+						tableCell.style.color = 'black';
 					} else {
 						tableCell.classList.add('quartile-four');
 					}
