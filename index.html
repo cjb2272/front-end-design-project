@@ -68,7 +68,7 @@
 		</div>
 	</body>
 
-	<!-- -->
+	<!--ANSWERS TO developmental questions at bottom of index, after script-->
 	<script type="text/javascript">
 
     let xDim = 0; let yDim = 0;
@@ -96,8 +96,7 @@
 				yDim = document.getElementById('y-depth').value;
 			}
 
-      //this might be flawed, can try without simple no value
-			//verification
+      // is there a better way for me to do this?
 			if (ret === true) {
 				createMultTable();
 			}
@@ -111,6 +110,8 @@
 
 		x and y for loop increment vars are used for creating the cells
 		themselves and determining the quartile
+
+		pre-cond: xDim and yDim values are set
 		*/
 		function createMultTable() {
       var maxTableValue = xDim * yDim;
@@ -158,4 +159,18 @@
 		}
 
 	</script>
+
+	<!--
+  DEVELOPMENTAL Q RESPONCES:
+
+	Describe the difference between a JavaScript library and a JavaScript
+	framework. Provide examples of each and a brief description of the
+	functionality they provide:
+    a javascript library provides functions to make your life easier
+
+	Write a development plan for how you might adapt this web page to achieve
+	the following additional requirements:
+
+	-->
+
 </html>
